@@ -1,4 +1,6 @@
 import sys
+import ast
+import operator
 
 # 계산기 메뉴 출력 함수
 def display_menu():
@@ -13,48 +15,44 @@ def display_menu():
     print("8. 프로그램 종료")
     print("==============================")
 
-# 사칙연산 메뉴 출력 함수
-def arithmetic_operations_display():
-    print("\n==== 사칙 연산 계산기 메뉴 ====")
-    print("1. 덧셈")
-    print("2. 뺄셈")
-    print("3. 곱셈")
-    print("4. 나눗셈")
-    print("5. 계산기 메뉴로 돌아가기")
-    print("6. 프로그램 종료")
-    print("==============================")
-
-# 사칙 연산 수행 함수
-def perform_arithmetic_operations():
-    while True:
-        arithmetic_operations_display()
-        choice = input("사용할 연산을 선택하세요: ")
-
-        if choice == '5':
-            return  # 메뉴로 돌아가기 위해 함수 종료
-        elif choice == '6':
-            print("계산기를 종료합니다. 뿌슝!")
-            sys.exit()  # 프로그램 종료
-        elif choice in ['1', '2', '3', '4']:
-            try:
-                num1 = float(input("첫번째 숫자를 입력하시오: "))
-                num2 = float(input("두번째 숫자를 입력하시오: "))
-
-                if choice == '1':
-                    print(f"{num1} + {num2} = {num1 + num2}")
-                elif choice == '2':
-                    print(f"{num1} - {num2} = {num1 - num2}")
-                elif choice == '3':
-                    print(f"{num1} * {num2} = {num1 * num2}")
-                elif choice == '4':
-                    if num2 != 0:
-                        print(f"{num1} / {num2} = {num1 / num2}")
-                    else:
-                        print("오류! 0으로 나눌 수 없습니다.")
-            except ValueError:
-                print("유효하지 않은 입력입니다. 숫자를 입력해 주세요.")
+# 사칙연산 계산기 함수
+def calculate_expression(expression):
+    # 연산자 정의
+    operators = {
+        '+': operator.add,
+        '-': operator.sub,
+        '*': operator.mul,
+        '/': operator.truediv
+    }
+    
+    # 표현식 파싱
+    def eval_node(node):
+        if isinstance(node, ast.BinOp):
+            left = eval_node(node.left)
+            right = eval_node(node.right)
+            return operators[type(node.op).__name__](left, right)
+        elif isinstance(node, ast.Num):
+            return node.n
         else:
-            print("입력 에러! 다시 입력해주세요!")
+            raise TypeError(node)
+
+    # 표현식의 AST 생성
+    try:
+        tree = ast.parse(expression, mode='eval')
+        return eval_node(tree.body)
+    except ZeroDivisionError:
+        return "오류! 0으로 나눌 수 없습니다."
+    except Exception as e:
+        return f"오류: {e}"
+
+# 사칙연산을 수행하는 함수
+def arithmetic_operations():
+    expr = input("계산할 수식을 입력하세요 (예: 1 + 2 * 3 / 4): ")
+    try:
+        result = eval(expr)  # 수식을 계산
+        print(f"결과: {result}")
+    except Exception as e:
+        print(f"오류 발생: {e}")
 
 # 프로그램 실행
 def main():
@@ -70,6 +68,5 @@ def main():
         else:
             print("잘못된 선택입니다. 다시 시도하세요.")
 
-# 예시 실행
 if __name__ == "__main__":
     main()
