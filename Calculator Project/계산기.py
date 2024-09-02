@@ -184,6 +184,9 @@ def main():
         
         if menu_choice == '1':
             calculator()
+        elif menu_choice == '2':
+            # TODO 만들어 ㅇㅇ 
+            print("삼각함수") # FIXME
         elif menu_choice == '0':
             print("프로그램을 종료합니다.")
             break
