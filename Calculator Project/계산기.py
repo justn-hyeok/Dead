@@ -7,6 +7,7 @@ def main_menu():
 메인 메뉴
 -----------------------
 1 | 계산기
+2 | 삼각함수
 0 | 프로그램 종료하기
 =======================
 사용할 기능을 선택해주세요: """, end="")
@@ -58,6 +59,19 @@ b | 뒤로 가기
 =======================
 사용할 기능을 선택해주세요: """, end="")
 
+# 삼각함수 메뉴
+def trig_menu():
+    print("""
+=======================
+삼각함수 메뉴
+-----------------------
+1 | sin
+2 | cos
+3 | tan
+b | 뒤로 가기
+=======================
+사용할 기능을 선택해주세요: """, end="")
+
 # 기본 연산
 def add(a, b):
     return a + b
@@ -93,6 +107,17 @@ def root(a):
         raise ValueError("음수의 제곱근은 허용되지 않습니다.")
     return math.sqrt(a)
 
+# 삼각함수 계산
+def trig_sin(angle):
+    return math.sin(math.radians(angle))
+
+def trig_cos(angle):
+    return math.cos(math.radians(angle))
+
+def trig_tan(angle):
+    return math.tan(math.radians(angle))
+
+# 계산기 기능
 def calculator():
     while True:
         calculator_menu()
@@ -177,6 +202,26 @@ def calculator():
         else:
             print("잘못된 선택입니다. 다시 시도해주세요.")
 
+# 삼각함수 기능 추가
+def trigonometry():
+    while True:
+        trig_menu()
+        trig_choice = input().strip().lower()
+
+        if trig_choice == '1':
+            angle = float(input("각도를 입력하세요(도 단위): "))
+            print(f"sin({angle}) = {trig_sin(angle)}")
+        elif trig_choice == '2':
+            angle = float(input("각도를 입력하세요(도 단위): "))
+            print(f"cos({angle}) = {trig_cos(angle)}")
+        elif trig_choice == '3':
+            angle = float(input("각도를 입력하세요(도 단위): "))
+            print(f"tan({angle}) = {trig_tan(angle)}")
+        elif trig_choice == 'b':
+            break
+        else:
+            print("잘못된 선택입니다. 다시 시도해주세요.")
+
 def main():
     while True:
         main_menu()
@@ -185,8 +230,7 @@ def main():
         if menu_choice == '1':
             calculator()
         elif menu_choice == '2':
-            # TODO 만들어 ㅇㅇ 
-            print("삼각함수") # FIXME
+            trigonometry()  # 삼각함수 기능 추가
         elif menu_choice == '0':
             print("프로그램을 종료합니다.")
             break
