@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css" />
+  <title>Momentum App</title>
+</head>
+
+<body>
+  <div id="weather-container">
+    <img id="icon"></img>
+    <div id="weather">
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div id="contain">
+    <form id="login-form" class="hidden">
+      <input required maxlength="15" type="text" placeholder="What is your name?" />
+      <button>Log In</button>
+    </form>
+    <h2 id="clock">00:00:00</h2>
+    <h1 id="greeting" class="hidden"></h1>
+    <form id="todo-form">
+      <input type="text" placeholder="Write Press Enter">
+    </form>
+    <ul id="todo-list"></ul>
+    <div id="goodSentance">
+      <span></span>
+    </div>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <lottie-player id="movingImpage" src="https://assets4.lottiefiles.com/packages/lf20_lbxov9bj.json" background="transparent"
+    speed="1" style="width: 500px; height: 500px;" loop controls autoplay></lottie-player>
+  <script src="js/clock.js"></script>
+  <script src="js/greetings.js"></script>
+  <script src="js/goodSentance.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/todo.js"></script>
+  <script src="js/weather.js"></script>
+</body>
+
+</html>
