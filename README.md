@@ -8,3 +8,7 @@ CSS는 ChatGPT가 대충 짜줬어요. (하다가 꼬라지 맘에 안들어서 
 
 ## Inventory Management System
 파이썬으로 간단한 재고 관리 시스템 구현
+
+## TODO LIST
+바닐라 JS, 상남자 클럽이라 CSS 안 함
+[이거보고했어요](https://gobae.tistory.com/18?category=942666)
